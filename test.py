@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_from_directory
 import csv
 app = Flask(__name__)
 
@@ -6,6 +6,10 @@ app = Flask(__name__)
 @app.route('/')
 def landing():
     return render_template("index.html")
+
+@app.route('/download')
+def download():
+    return send_from_directory("static", filename="cv.pdf")
 
 @app.route('/<string:page_name>')
 def html_page(page_name):
@@ -39,3 +43,4 @@ def submit():
     else:
         return 'sthwentwrong'
     return "done"
+
